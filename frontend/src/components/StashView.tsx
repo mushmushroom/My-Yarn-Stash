@@ -45,7 +45,7 @@ export function StashView() {
         <div key={brandName}>
           <div className="flex items-center gap-3 mb-4">
             {brandLogos[brandName] ? (
-              <img src={brandLogos[brandName]} alt={brandName} className="h-8 w-auto object-contain" />
+              <img src={brandLogos[brandName]} alt={brandName} className="w-24 h-auto max-h-10 object-contain" />
             ) : (
               <span className="text-base font-semibold">{brandName}</span>
             )}
