@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function useFetchBrands() {
   return useQuery({
-    queryKey: ['brands'],
+    queryKey: ["brands"],
     queryFn: api.getBrands,
   });
 }

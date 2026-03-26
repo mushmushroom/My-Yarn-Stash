@@ -36,7 +36,7 @@ export const COLOR_MAP: Record<string, string> = {
 };
 
 export const API_ENDPOINTS = {
-  SKEINS :'/skeins',
+  SKEINS: '/skeins',
   PROJECTS: '/projects',
   BRANDS: '/brands',
   YARDAGE_UNITS: '/yardage-units',

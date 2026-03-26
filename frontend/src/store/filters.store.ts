@@ -17,10 +17,10 @@ export const useFiltersStore = create<FiltersState>((set) => ({
 
       const existingFilterByKey = (state.filters[key] as string[] | undefined) ?? [];
       const stringValue = value as string;
-      const updatedFiltersNyKey = existingFilterByKey.includes(stringValue)
+      const updatedFiltersByKey = existingFilterByKey.includes(stringValue)
         ? existingFilterByKey.filter((v) => v !== stringValue)
         : [...existingFilterByKey, stringValue];
-      return { filters: { ...state.filters, [key]: updatedFiltersNyKey } };
+      return { filters: { ...state.filters, [key]: updatedFiltersByKey } };
     });
   },
   clearFilters: () => set({ filters: {} }),

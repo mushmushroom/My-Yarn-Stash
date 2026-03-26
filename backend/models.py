@@ -2,11 +2,9 @@ from enum import Enum
 from sqlalchemy import Column, Enum as SAEnum, JSON
 from sqlmodel import SQLModel, Field, Relationship
 
-'''
-=========================================
-Enums
-=========================================
-'''
+# =========================================
+# Enums
+# =========================================
 class YardageUnit(str, Enum):
   g25 = "25g"
   g50 = "50g"
@@ -18,11 +16,9 @@ class Category(str, Enum):
   summer_tops = "Summer Tops"
   accessories = "Accessories"
 
-'''
-=========================================
-Contents
-=========================================
-'''
+# =========================================
+# Contents
+# =========================================
 class Fiber(str, Enum):
   merino = 'merino wool'
   wool = 'wool'
@@ -39,11 +35,9 @@ class Fiber(str, Enum):
   elastane = 'elastane'
   viscose = 'viscose'
 
-'''
-=========================================
-Brand
-=========================================
-'''
+# =========================================
+# Brand
+# =========================================
 class BrandCreate(SQLModel):
   name: str
 
@@ -54,11 +48,9 @@ class Brand(BrandCreate, table=True):
   skeins: list["Skein"] = Relationship(back_populates="brand")
 
 
-'''
-=========================================
-ProjectSkeinLink
-=========================================
-'''
+# =========================================
+# ProjectSkeinLink
+# =========================================
 # TABLE
 # Many-to-many link table
 class ProjectSkeinLink(SQLModel, table=True):
@@ -67,11 +59,9 @@ class ProjectSkeinLink(SQLModel, table=True):
   weight_required: int = 0
 
 
-'''
-=========================================
-Skeins
-=========================================
-'''
+# =========================================
+# Skeins
+# =========================================
 class SkeinCreate(SQLModel):
   name: str
   brand_id: int
@@ -118,11 +108,9 @@ class Skein(SkeinCreate, table=True):
   projects: list["Project"] = Relationship(back_populates="skeins", link_model=ProjectSkeinLink)
 
 
-'''
-=========================================
-Project
-=========================================
-'''
+# =========================================
+# Project
+# =========================================
 class ProjectSkeinInput(SQLModel):
   skein_id: int
   weight_required: int

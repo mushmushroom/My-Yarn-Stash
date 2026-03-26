@@ -11,6 +11,11 @@ COLOR_CANDIDATES = frozenset({
     'brown', 'beige', 'gold', 'coral', 'lavender',
 })
 
+_COLOR_RGB_CACHE: dict[str, tuple[int, int, int]] = {
+    name: webcolors.hex_to_rgb(webcolors.name_to_hex(name))
+    for name in COLOR_CANDIDATES
+}
+
 def closest_color_name(hex_color: str) -> str:
     try:
         name = webcolors.hex_to_name(hex_color)
@@ -21,8 +26,7 @@ def closest_color_name(hex_color: str) -> str:
     rgb = webcolors.hex_to_rgb(hex_color)
     min_dist = float('inf')
     closest = 'black'
-    for name in COLOR_CANDIDATES:
-        c = webcolors.hex_to_rgb(webcolors.name_to_hex(name))
+    for name, c in _COLOR_RGB_CACHE.items():
         dist = (rgb[0] - c[0]) ** 2 + (rgb[1] - c[1]) ** 2 + (rgb[2] - c[2]) ** 2
         if dist < min_dist:
             min_dist = dist
@@ -43,7 +47,7 @@ def get_skein_names(session: Session = Depends(get_session)):
     return result
 
 @router.get('', response_model=dict[str, dict[str, list[SkeinRead]]])
-def get_skeins(session: Session = Depends(get_session), brand: list[str] | None = Query(default=None), skip_reserved: bool = False, yardage: str | None = None, colors: list[str] | None = Query(default=None), fibers: list[str] | None = Query(default=None)):
+def get_skeins(session: Session = Depends(get_session), brand: list[str] | None = Query(default=None), skip_reserved: bool = False, colors: list[str] | None = Query(default=None), fibers: list[str] | None = Query(default=None)):
     skeins = session.exec(select(Skein)).all()
     used_weight: dict[int, int] = {}
     if skip_reserved:

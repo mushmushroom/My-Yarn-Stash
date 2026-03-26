@@ -100,6 +100,7 @@ export function StashFilters() {
                 const active = filters.colors?.includes(name);
                 return (
                   <button
+                    aria-label={name}
                     key={name}
                     title={name}
                     onClick={() => setFilters('colors', name)}

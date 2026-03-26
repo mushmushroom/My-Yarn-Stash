@@ -4,8 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { skeinSchema } from '@/schemas/skein.schema';
 import { useSkeinsStore } from '@/store/skeins.store';
-import type { SkeinFormData } from '@/lib/types';
-import type { SkeinItem } from '@/lib/types';
+import type { SkeinFormData, SkeinItem } from '@/lib/types';
 
 interface UseEditSkeinFormProps {
   skein: SkeinItem;

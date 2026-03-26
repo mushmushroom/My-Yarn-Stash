@@ -19,7 +19,7 @@ def create_brand(brand: BrandCreate, session: Session = Depends(get_session)):
     return brand
 
 @router.delete("/{id}", status_code=204)
-def delete_project(id: int, session: Session = Depends(get_session)):
+def delete_brand(id: int, session: Session = Depends(get_session)):
     brand = session.get(Brand, id)
     if not brand:
         raise HTTPException(status_code=404, detail="Brand not found")

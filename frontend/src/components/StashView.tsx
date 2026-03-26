@@ -6,16 +6,18 @@ import { useFiltersStore } from '@/store/filters.store';
 import { useRemoveSkein } from '@/hooks/useRemoveSkein';
 import { SkeinCard } from '@/components/SkeinCard';
 import { api } from '@/api/api';
-import type { ProjectUsage } from '@/lib/types';
+import type { ProjectItem } from '@/lib/types';
 
 export function StashView() {
   const { grouped, isLoading, isError, fetch } = useSkeinsStore();
   const { filters } = useFiltersStore();
   const { removing, handleRemove } = useRemoveSkein();
 
-  useEffect(() => { fetch(filters); }, [fetch, filters]);
+  useEffect(() => {
+    fetch(filters);
+  }, [fetch, filters]);
 
-  const { data: projects = [] } = useQuery<ProjectUsage[]>({
+  const { data: projects = [] } = useQuery<ProjectItem[]>({
     queryKey: ['projects'],
     queryFn: api.getProjects,
   });
@@ -38,14 +40,17 @@ export function StashView() {
   if (entries.length === 0) {
     return <p className="text-muted-foreground text-sm">No skeins added yet.</p>;
   }
-
   return (
     <div className="space-y-8">
       {entries.map(([brandName, skeins]) => (
         <div key={brandName}>
           <div className="flex items-center gap-3 mb-4">
             {brandLogos[brandName] ? (
-              <img src={brandLogos[brandName]} alt={brandName} className="w-24 h-auto max-h-10 object-contain" />
+              <img
+                src={brandLogos[brandName]}
+                alt={brandName}
+                className="w-24 h-auto max-h-10 object-contain"
+              />
             ) : (
               <span className="text-base font-semibold">{brandName}</span>
             )}
@@ -57,10 +62,9 @@ export function StashView() {
                 <div className="flex flex-wrap items-baseline gap-2 mb-2">
                   <p className="text-sm font-medium">{skeinName}</p>
                   {(() => {
-                    const fibers = variants.flatMap((s) => s.fibers ?? []);
-                    const unique = [...new Set(fibers)];
-                    return unique.length > 0 ? (
-                      <p className="text-xs text-muted-foreground">{unique.join(' · ')}</p>
+                    const uniqueFibers = [...new Set(variants.flatMap((s) => s.fibers ?? []))];
+                    return uniqueFibers.length > 0 ? (
+                      <p className="text-xs text-muted-foreground">{uniqueFibers.join(' · ')}</p>
                     ) : null;
                   })()}
                 </div>

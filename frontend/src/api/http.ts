@@ -7,13 +7,6 @@ const http = axios.create({
   timeout: 300000, // 5 minutes — large archive uploads can be slow
 });
 
-http.interceptors.request.use(
-  (config) => {
-    return config;
-  },
-  (error) => Promise.reject(error),
-);
-
 http.interceptors.response.use(
   (response) => response,
   (error) => {

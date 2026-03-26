@@ -22921,3 +22921,354 @@ FROM skein
 WHERE skein.id = %(pk_1)s
 2026-03-25 15:30:48,036 [INFO] sqlalchemy.engine.Engine: [cached since 1519s ago] {'pk_1': 13}
 2026-03-25 15:30:48,041 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 17:44:50,817 [INFO] sqlalchemy.engine.Engine: select pg_catalog.version()
+2026-03-26 17:44:50,818 [INFO] sqlalchemy.engine.Engine: [raw sql] {}
+2026-03-26 17:44:50,819 [INFO] sqlalchemy.engine.Engine: select current_schema()
+2026-03-26 17:44:50,819 [INFO] sqlalchemy.engine.Engine: [raw sql] {}
+2026-03-26 17:44:50,820 [INFO] sqlalchemy.engine.Engine: show standard_conforming_strings
+2026-03-26 17:44:50,820 [INFO] sqlalchemy.engine.Engine: [raw sql] {}
+2026-03-26 17:44:50,822 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:44:50,824 [INFO] sqlalchemy.engine.Engine: SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-03-26 17:44:50,824 [INFO] sqlalchemy.engine.Engine: [generated in 0.00017s] {'table_name': 'brand', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-03-26 17:44:50,828 [INFO] sqlalchemy.engine.Engine: SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-03-26 17:44:50,828 [INFO] sqlalchemy.engine.Engine: [cached since 0.004084s ago] {'table_name': 'projectskeinlink', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-03-26 17:44:50,829 [INFO] sqlalchemy.engine.Engine: SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-03-26 17:44:50,829 [INFO] sqlalchemy.engine.Engine: [cached since 0.004832s ago] {'table_name': 'skein', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-03-26 17:44:50,830 [INFO] sqlalchemy.engine.Engine: SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-03-26 17:44:50,830 [INFO] sqlalchemy.engine.Engine: [cached since 0.005427s ago] {'table_name': 'project', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-03-26 17:44:50,831 [INFO] sqlalchemy.engine.Engine: SELECT pg_catalog.pg_type.typname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace 
+WHERE pg_catalog.pg_type.typname = %(typname_1)s AND pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-03-26 17:44:50,831 [INFO] sqlalchemy.engine.Engine: [generated in 0.00012s] {'typname_1': 'yardageunit', 'nspname_1': 'pg_catalog'}
+2026-03-26 17:44:50,834 [INFO] sqlalchemy.engine.Engine: SELECT pg_catalog.pg_type.typname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace 
+WHERE pg_catalog.pg_type.typname = %(typname_1)s AND pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-03-26 17:44:50,834 [INFO] sqlalchemy.engine.Engine: [cached since 0.002341s ago] {'typname_1': 'category', 'nspname_1': 'pg_catalog'}
+2026-03-26 17:44:50,836 [INFO] sqlalchemy.engine.Engine: COMMIT
+2026-03-26 17:46:39,018 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:46:39,035 [INFO] sqlalchemy.engine.Engine: SELECT skein.name, skein.color, skein.weight, skein.yardage, skein.comment, skein.id, skein.brand_id, skein.yardage_unit, skein.fibers 
+FROM skein
+2026-03-26 17:46:39,035 [INFO] sqlalchemy.engine.Engine: [generated in 0.00107s] {}
+2026-03-26 17:46:39,126 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:46:39,126 [INFO] sqlalchemy.engine.Engine: [generated in 0.00015s] {'pk_1': 2}
+2026-03-26 17:46:39,130 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:46:39,130 [INFO] sqlalchemy.engine.Engine: [cached since 0.003662s ago] {'pk_1': 5}
+2026-03-26 17:46:39,131 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:46:39,131 [INFO] sqlalchemy.engine.Engine: [cached since 0.004556s ago] {'pk_1': 1}
+2026-03-26 17:46:39,131 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:46:39,131 [INFO] sqlalchemy.engine.Engine: [cached since 0.00513s ago] {'pk_1': 10}
+2026-03-26 17:46:39,132 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:46:39,132 [INFO] sqlalchemy.engine.Engine: [cached since 0.005721s ago] {'pk_1': 11}
+2026-03-26 17:46:39,136 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 17:47:43,093 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:47:43,106 [INFO] sqlalchemy.engine.Engine: SELECT skein.name, skein.color, skein.weight, skein.yardage, skein.comment, skein.id, skein.brand_id, skein.yardage_unit, skein.fibers 
+FROM skein
+2026-03-26 17:47:43,107 [INFO] sqlalchemy.engine.Engine: [cached since 64.08s ago] {}
+2026-03-26 17:47:43,148 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:47:43,166 [INFO] sqlalchemy.engine.Engine: [cached since 64.04s ago] {'pk_1': 2}
+2026-03-26 17:47:43,175 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:47:43,175 [INFO] sqlalchemy.engine.Engine: [cached since 64.05s ago] {'pk_1': 5}
+2026-03-26 17:47:43,176 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:47:43,176 [INFO] sqlalchemy.engine.Engine: [cached since 64.05s ago] {'pk_1': 1}
+2026-03-26 17:47:43,223 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:47:43,223 [INFO] sqlalchemy.engine.Engine: [cached since 64.1s ago] {'pk_1': 10}
+2026-03-26 17:47:43,226 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:47:43,226 [INFO] sqlalchemy.engine.Engine: [cached since 64.1s ago] {'pk_1': 11}
+2026-03-26 17:47:43,305 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 17:48:24,683 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:48:24,688 [INFO] sqlalchemy.engine.Engine: SELECT skein.name, skein.color, skein.weight, skein.yardage, skein.comment, skein.id, skein.brand_id, skein.yardage_unit, skein.fibers 
+FROM skein
+2026-03-26 17:48:24,689 [INFO] sqlalchemy.engine.Engine: [cached since 105.7s ago] {}
+2026-03-26 17:48:24,701 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:48:24,701 [INFO] sqlalchemy.engine.Engine: [cached since 105.6s ago] {'pk_1': 2}
+2026-03-26 17:48:24,704 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:48:24,704 [INFO] sqlalchemy.engine.Engine: [cached since 105.6s ago] {'pk_1': 5}
+2026-03-26 17:48:24,706 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:48:24,706 [INFO] sqlalchemy.engine.Engine: [cached since 105.6s ago] {'pk_1': 1}
+2026-03-26 17:48:24,708 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:48:24,708 [INFO] sqlalchemy.engine.Engine: [cached since 105.6s ago] {'pk_1': 10}
+2026-03-26 17:48:24,710 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:48:24,711 [INFO] sqlalchemy.engine.Engine: [cached since 105.6s ago] {'pk_1': 11}
+2026-03-26 17:48:24,723 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 17:57:02,821 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:57:02,851 [INFO] sqlalchemy.engine.Engine: SELECT skein.name, skein.color, skein.weight, skein.yardage, skein.comment, skein.id, skein.brand_id, skein.yardage_unit, skein.fibers 
+FROM skein
+2026-03-26 17:57:02,852 [INFO] sqlalchemy.engine.Engine: [cached since 623.9s ago] {}
+2026-03-26 17:57:02,926 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:57:02,926 [INFO] sqlalchemy.engine.Engine: [cached since 623.8s ago] {'pk_1': 2}
+2026-03-26 17:57:02,932 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:57:02,932 [INFO] sqlalchemy.engine.Engine: [cached since 623.9s ago] {'pk_1': 5}
+2026-03-26 17:57:02,934 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:57:02,934 [INFO] sqlalchemy.engine.Engine: [cached since 623.9s ago] {'pk_1': 1}
+2026-03-26 17:57:02,934 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:57:02,945 [INFO] sqlalchemy.engine.Engine: [cached since 623.9s ago] {'pk_1': 10}
+2026-03-26 17:57:02,947 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:57:02,947 [INFO] sqlalchemy.engine.Engine: [cached since 623.9s ago] {'pk_1': 11}
+2026-03-26 17:57:02,965 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 17:59:49,831 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:59:49,842 [INFO] sqlalchemy.engine.Engine: SELECT skein.name, skein.color, skein.weight, skein.yardage, skein.comment, skein.id, skein.brand_id, skein.yardage_unit, skein.fibers 
+FROM skein
+2026-03-26 17:59:49,844 [INFO] sqlalchemy.engine.Engine: [cached since 790.9s ago] {}
+2026-03-26 17:59:49,899 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:49,899 [INFO] sqlalchemy.engine.Engine: [cached since 790.8s ago] {'pk_1': 2}
+2026-03-26 17:59:49,907 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:49,907 [INFO] sqlalchemy.engine.Engine: [cached since 790.8s ago] {'pk_1': 5}
+2026-03-26 17:59:49,909 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:49,909 [INFO] sqlalchemy.engine.Engine: [cached since 790.8s ago] {'pk_1': 1}
+2026-03-26 17:59:49,910 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:49,910 [INFO] sqlalchemy.engine.Engine: [cached since 790.8s ago] {'pk_1': 10}
+2026-03-26 17:59:49,910 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:49,911 [INFO] sqlalchemy.engine.Engine: [cached since 790.8s ago] {'pk_1': 11}
+2026-03-26 17:59:49,929 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 17:59:52,483 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:59:52,513 [INFO] sqlalchemy.engine.Engine: SELECT brand.name, brand.id 
+FROM brand
+2026-03-26 17:59:52,513 [INFO] sqlalchemy.engine.Engine: [generated in 0.00052s] {}
+2026-03-26 17:59:52,553 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 17:59:53,167 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:59:53,208 [INFO] sqlalchemy.engine.Engine: SELECT project.name, project.id, project.category 
+FROM project
+2026-03-26 17:59:53,209 [INFO] sqlalchemy.engine.Engine: [generated in 0.00150s] {}
+2026-03-26 17:59:53,371 [INFO] sqlalchemy.engine.Engine: SELECT projectskeinlink.project_id, projectskeinlink.skein_id, projectskeinlink.weight_required 
+FROM projectskeinlink 
+WHERE projectskeinlink.project_id = %(project_id_1)s
+2026-03-26 17:59:53,371 [INFO] sqlalchemy.engine.Engine: [generated in 0.00045s] {'project_id_1': 4}
+2026-03-26 17:59:53,397 [INFO] sqlalchemy.engine.Engine: SELECT skein.name AS skein_name, skein.color AS skein_color, skein.weight AS skein_weight, skein.yardage AS skein_yardage, skein.comment AS skein_comment, skein.id AS skein_id, skein.brand_id AS skein_brand_id, skein.yardage_unit AS skein_yardage_unit, skein.fibers AS skein_fibers 
+FROM skein 
+WHERE skein.id = %(pk_1)s
+2026-03-26 17:59:53,397 [INFO] sqlalchemy.engine.Engine: [generated in 0.00043s] {'pk_1': 12}
+2026-03-26 17:59:53,405 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,405 [INFO] sqlalchemy.engine.Engine: [cached since 794.3s ago] {'pk_1': 1}
+2026-03-26 17:59:53,415 [INFO] sqlalchemy.engine.Engine: SELECT skein.name AS skein_name, skein.color AS skein_color, skein.weight AS skein_weight, skein.yardage AS skein_yardage, skein.comment AS skein_comment, skein.id AS skein_id, skein.brand_id AS skein_brand_id, skein.yardage_unit AS skein_yardage_unit, skein.fibers AS skein_fibers 
+FROM skein 
+WHERE skein.id = %(pk_1)s
+2026-03-26 17:59:53,415 [INFO] sqlalchemy.engine.Engine: [cached since 0.01829s ago] {'pk_1': 13}
+2026-03-26 17:59:53,450 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 17:59:53,541 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:59:53,542 [INFO] sqlalchemy.engine.Engine: SELECT brand.name, brand.id 
+FROM brand
+2026-03-26 17:59:53,542 [INFO] sqlalchemy.engine.Engine: [cached since 1.029s ago] {}
+2026-03-26 17:59:53,551 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:59:53,617 [INFO] sqlalchemy.engine.Engine: SELECT project.name, project.id, project.category 
+FROM project
+2026-03-26 17:59:53,618 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 17:59:53,624 [INFO] sqlalchemy.engine.Engine: [cached since 0.4156s ago] {}
+2026-03-26 17:59:53,646 [INFO] sqlalchemy.engine.Engine: SELECT projectskeinlink.project_id, projectskeinlink.skein_id, projectskeinlink.weight_required 
+FROM projectskeinlink 
+WHERE projectskeinlink.project_id = %(project_id_1)s
+2026-03-26 17:59:53,647 [INFO] sqlalchemy.engine.Engine: [cached since 0.2764s ago] {'project_id_1': 4}
+2026-03-26 17:59:53,655 [INFO] sqlalchemy.engine.Engine: SELECT skein.name AS skein_name, skein.color AS skein_color, skein.weight AS skein_weight, skein.yardage AS skein_yardage, skein.comment AS skein_comment, skein.id AS skein_id, skein.brand_id AS skein_brand_id, skein.yardage_unit AS skein_yardage_unit, skein.fibers AS skein_fibers 
+FROM skein 
+WHERE skein.id = %(pk_1)s
+2026-03-26 17:59:53,669 [INFO] sqlalchemy.engine.Engine: [cached since 0.272s ago] {'pk_1': 12}
+2026-03-26 17:59:53,671 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,672 [INFO] sqlalchemy.engine.Engine: [cached since 794.6s ago] {'pk_1': 1}
+2026-03-26 17:59:53,672 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:59:53,672 [INFO] sqlalchemy.engine.Engine: SELECT skein.name, skein.color, skein.weight, skein.yardage, skein.comment, skein.id, skein.brand_id, skein.yardage_unit, skein.fibers 
+FROM skein
+2026-03-26 17:59:53,673 [INFO] sqlalchemy.engine.Engine: SELECT skein.name AS skein_name, skein.color AS skein_color, skein.weight AS skein_weight, skein.yardage AS skein_yardage, skein.comment AS skein_comment, skein.id AS skein_id, skein.brand_id AS skein_brand_id, skein.yardage_unit AS skein_yardage_unit, skein.fibers AS skein_fibers 
+FROM skein 
+WHERE skein.id = %(pk_1)s
+2026-03-26 17:59:53,674 [INFO] sqlalchemy.engine.Engine: [cached since 0.2771s ago] {'pk_1': 13}
+2026-03-26 17:59:53,673 [INFO] sqlalchemy.engine.Engine: [cached since 794.7s ago] {}
+2026-03-26 17:59:53,679 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 17:59:53,688 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 17:59:53,689 [INFO] sqlalchemy.engine.Engine: SELECT skein.name, skein.color, skein.weight, skein.yardage, skein.comment, skein.id, skein.brand_id, skein.yardage_unit, skein.fibers 
+FROM skein
+2026-03-26 17:59:53,689 [INFO] sqlalchemy.engine.Engine: [cached since 794.7s ago] {}
+2026-03-26 17:59:53,714 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,714 [INFO] sqlalchemy.engine.Engine: [cached since 794.6s ago] {'pk_1': 2}
+2026-03-26 17:59:53,715 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,715 [INFO] sqlalchemy.engine.Engine: [cached since 794.6s ago] {'pk_1': 2}
+2026-03-26 17:59:53,716 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,716 [INFO] sqlalchemy.engine.Engine: [cached since 794.6s ago] {'pk_1': 5}
+2026-03-26 17:59:53,716 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,716 [INFO] sqlalchemy.engine.Engine: [cached since 794.6s ago] {'pk_1': 5}
+2026-03-26 17:59:53,717 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,717 [INFO] sqlalchemy.engine.Engine: [cached since 794.6s ago] {'pk_1': 1}
+2026-03-26 17:59:53,718 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,718 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,718 [INFO] sqlalchemy.engine.Engine: [cached since 794.6s ago] {'pk_1': 1}
+2026-03-26 17:59:53,719 [INFO] sqlalchemy.engine.Engine: [cached since 794.6s ago] {'pk_1': 10}
+2026-03-26 17:59:53,721 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,721 [INFO] sqlalchemy.engine.Engine: [cached since 794.6s ago] {'pk_1': 11}
+2026-03-26 17:59:53,722 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,722 [INFO] sqlalchemy.engine.Engine: [cached since 794.6s ago] {'pk_1': 10}
+2026-03-26 17:59:53,723 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 17:59:53,723 [INFO] sqlalchemy.engine.Engine: [cached since 794.7s ago] {'pk_1': 11}
+2026-03-26 17:59:53,724 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 17:59:53,726 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 18:00:22,717 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 18:00:22,720 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 18:00:22,734 [INFO] sqlalchemy.engine.Engine: SELECT project.name, project.id, project.category 
+FROM project
+2026-03-26 18:00:22,734 [INFO] sqlalchemy.engine.Engine: SELECT skein.name, skein.color, skein.weight, skein.yardage, skein.comment, skein.id, skein.brand_id, skein.yardage_unit, skein.fibers 
+FROM skein
+2026-03-26 18:00:22,735 [INFO] sqlalchemy.engine.Engine: [cached since 29.53s ago] {}
+2026-03-26 18:00:22,739 [INFO] sqlalchemy.engine.Engine: [cached since 823.8s ago] {}
+2026-03-26 18:00:22,774 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:22,775 [INFO] sqlalchemy.engine.Engine: SELECT projectskeinlink.project_id, projectskeinlink.skein_id, projectskeinlink.weight_required 
+FROM projectskeinlink 
+WHERE projectskeinlink.project_id = %(project_id_1)s
+2026-03-26 18:00:22,775 [INFO] sqlalchemy.engine.Engine: [cached since 29.41s ago] {'project_id_1': 4}
+2026-03-26 18:00:22,775 [INFO] sqlalchemy.engine.Engine: [cached since 823.7s ago] {'pk_1': 2}
+2026-03-26 18:00:22,780 [INFO] sqlalchemy.engine.Engine: SELECT skein.name AS skein_name, skein.color AS skein_color, skein.weight AS skein_weight, skein.yardage AS skein_yardage, skein.comment AS skein_comment, skein.id AS skein_id, skein.brand_id AS skein_brand_id, skein.yardage_unit AS skein_yardage_unit, skein.fibers AS skein_fibers 
+FROM skein 
+WHERE skein.id = %(pk_1)s
+2026-03-26 18:00:22,780 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:22,780 [INFO] sqlalchemy.engine.Engine: [cached since 29.38s ago] {'pk_1': 12}
+2026-03-26 18:00:22,780 [INFO] sqlalchemy.engine.Engine: [cached since 823.7s ago] {'pk_1': 5}
+2026-03-26 18:00:22,781 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:22,781 [INFO] sqlalchemy.engine.Engine: [cached since 823.7s ago] {'pk_1': 1}
+2026-03-26 18:00:22,782 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:22,782 [INFO] sqlalchemy.engine.Engine: [cached since 823.7s ago] {'pk_1': 1}
+2026-03-26 18:00:22,783 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:22,784 [INFO] sqlalchemy.engine.Engine: SELECT skein.name AS skein_name, skein.color AS skein_color, skein.weight AS skein_weight, skein.yardage AS skein_yardage, skein.comment AS skein_comment, skein.id AS skein_id, skein.brand_id AS skein_brand_id, skein.yardage_unit AS skein_yardage_unit, skein.fibers AS skein_fibers 
+FROM skein 
+WHERE skein.id = %(pk_1)s
+2026-03-26 18:00:22,784 [INFO] sqlalchemy.engine.Engine: [cached since 823.7s ago] {'pk_1': 10}
+2026-03-26 18:00:22,784 [INFO] sqlalchemy.engine.Engine: [cached since 29.39s ago] {'pk_1': 13}
+2026-03-26 18:00:22,785 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:22,785 [INFO] sqlalchemy.engine.Engine: [cached since 823.7s ago] {'pk_1': 11}
+2026-03-26 18:00:22,788 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 18:00:22,790 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 18:00:24,639 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 18:00:24,649 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2026-03-26 18:00:24,650 [INFO] sqlalchemy.engine.Engine: SELECT skein.name, skein.color, skein.weight, skein.yardage, skein.comment, skein.id, skein.brand_id, skein.yardage_unit, skein.fibers 
+FROM skein
+2026-03-26 18:00:24,651 [INFO] sqlalchemy.engine.Engine: [cached since 825.7s ago] {}
+2026-03-26 18:00:24,651 [INFO] sqlalchemy.engine.Engine: SELECT project.name, project.id, project.category 
+FROM project
+2026-03-26 18:00:24,651 [INFO] sqlalchemy.engine.Engine: [cached since 31.45s ago] {}
+2026-03-26 18:00:24,667 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:24,668 [INFO] sqlalchemy.engine.Engine: [cached since 825.6s ago] {'pk_1': 2}
+2026-03-26 18:00:24,674 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:24,675 [INFO] sqlalchemy.engine.Engine: SELECT projectskeinlink.project_id, projectskeinlink.skein_id, projectskeinlink.weight_required 
+FROM projectskeinlink 
+WHERE projectskeinlink.project_id = %(project_id_1)s
+2026-03-26 18:00:24,677 [INFO] sqlalchemy.engine.Engine: [cached since 31.31s ago] {'project_id_1': 4}
+2026-03-26 18:00:24,677 [INFO] sqlalchemy.engine.Engine: [cached since 825.6s ago] {'pk_1': 5}
+2026-03-26 18:00:24,681 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:24,683 [INFO] sqlalchemy.engine.Engine: [cached since 825.6s ago] {'pk_1': 1}
+2026-03-26 18:00:24,683 [INFO] sqlalchemy.engine.Engine: SELECT skein.name AS skein_name, skein.color AS skein_color, skein.weight AS skein_weight, skein.yardage AS skein_yardage, skein.comment AS skein_comment, skein.id AS skein_id, skein.brand_id AS skein_brand_id, skein.yardage_unit AS skein_yardage_unit, skein.fibers AS skein_fibers 
+FROM skein 
+WHERE skein.id = %(pk_1)s
+2026-03-26 18:00:24,685 [INFO] sqlalchemy.engine.Engine: [cached since 31.29s ago] {'pk_1': 12}
+2026-03-26 18:00:24,690 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:24,691 [INFO] sqlalchemy.engine.Engine: [cached since 825.6s ago] {'pk_1': 10}
+2026-03-26 18:00:24,690 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:24,691 [INFO] sqlalchemy.engine.Engine: [cached since 825.6s ago] {'pk_1': 1}
+2026-03-26 18:00:24,697 [INFO] sqlalchemy.engine.Engine: SELECT brand.name AS brand_name, brand.id AS brand_id 
+FROM brand 
+WHERE brand.id = %(pk_1)s
+2026-03-26 18:00:24,698 [INFO] sqlalchemy.engine.Engine: [cached since 825.6s ago] {'pk_1': 11}
+2026-03-26 18:00:24,697 [INFO] sqlalchemy.engine.Engine: SELECT skein.name AS skein_name, skein.color AS skein_color, skein.weight AS skein_weight, skein.yardage AS skein_yardage, skein.comment AS skein_comment, skein.id AS skein_id, skein.brand_id AS skein_brand_id, skein.yardage_unit AS skein_yardage_unit, skein.fibers AS skein_fibers 
+FROM skein 
+WHERE skein.id = %(pk_1)s
+2026-03-26 18:00:24,698 [INFO] sqlalchemy.engine.Engine: [cached since 31.3s ago] {'pk_1': 13}
+2026-03-26 18:00:24,703 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2026-03-26 18:00:24,705 [INFO] sqlalchemy.engine.Engine: ROLLBACK

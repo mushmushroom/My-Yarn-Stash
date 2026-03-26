@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function useFetchFibers() {
   return useQuery({
-    queryKey: ['fibers'],
+    queryKey: ["fibers"],
     queryFn: api.getFibers,
   });
 }

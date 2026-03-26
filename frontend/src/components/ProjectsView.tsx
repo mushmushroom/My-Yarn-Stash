@@ -16,6 +16,7 @@ import type { ProjectItem } from '@/lib/types';
 export function ProjectsView() {
   const queryClient = useQueryClient();
   const [editingProject, setEditingProject] = useState<ProjectItem | null>(null);
+  const [deletingProjectId, setDeletingProjectId] = useState<number | null>(null)
 
   const { data: projects = [], isLoading, isError } = useQuery({
     queryKey: ['projects'],
@@ -26,9 +27,13 @@ export function ProjectsView() {
     mutationFn: api.deleteProject,
     onSuccess: () => {
       toast.success('Project removed');
+      setDeletingProjectId(null);
       queryClient.invalidateQueries({ queryKey: ['projects'] });
     },
-    onError: () => toast.error('Failed to delete project'),
+    onError: () => {
+      toast.error('Failed to delete project');
+      setDeletingProjectId(null);
+    },
   });
 
   if (isLoading) return <p className="text-muted-foreground text-sm">Loading projects...</p>;
@@ -64,8 +69,8 @@ export function ProjectsView() {
                   variant="ghost"
                   size="icon-sm"
                   className="text-muted-foreground hover:text-destructive"
-                  disabled={deleteMutation.isPending}
-                  onClick={() => deleteMutation.mutate(project.id)}
+                  disabled={deletingProjectId === project.id}
+                  onClick={() => { setDeletingProjectId(project.id); deleteMutation.mutate(project.id); }}
                 >
                   <Trash2 />
                 </Button>

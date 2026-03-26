@@ -68,7 +68,7 @@ export function SkeinCard({ skein, usedWeight, removing, onRemove }: SkeinCardPr
           <DrawerHeader>
             <DrawerTitle>Edit skein</DrawerTitle>
           </DrawerHeader>
-          <div className="px-4 pb-4">
+          <div className="px-4 pb-4 overflow-auto">
             <EditSkeinForm skein={skein} onClose={() => setIsEditing(false)} />
           </div>
         </DrawerContent>

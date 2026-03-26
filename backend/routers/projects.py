@@ -54,22 +54,21 @@ def create_project(project: ProjectCreate, session: Session = Depends(get_sessio
 
 @router.patch("/{id}")
 def update_project(id: int, update: ProjectUpdate, session: Session = Depends(get_session)):
-  project = session.get(Project, id)
-  if not project:
-    raise HTTPException(status_code=404, detail="Project not found")
-  if update.name is not None:
-    project.name = update.name
-  if update.category is not None:
-    project.category = update.category
-  if update.skeins is not None:
-    session.exec(delete(ProjectSkeinLink).where(ProjectSkeinLink.project_id == id))
-    for s in update.skeins:
-      session.add(ProjectSkeinLink(project_id=id, skein_id=s.skein_id, weight_required=s.weight_required))
-  
-  session.add(project)
-  session.commit()
-  session.refresh(project)
-  return _build_project_read(project, session)
+    project = session.get(Project, id)
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    if update.name is not None:
+        project.name = update.name
+    if update.category is not None:
+        project.category = update.category
+    if update.skeins is not None:
+        session.exec(delete(ProjectSkeinLink).where(ProjectSkeinLink.project_id == id))
+        for s in update.skeins:
+            session.add(ProjectSkeinLink(project_id=id, skein_id=s.skein_id, weight_required=s.weight_required))
+    session.add(project)
+    session.commit()
+    session.refresh(project)
+    return _build_project_read(project, session)
 
 @router.delete("/{id}", status_code=204)
 def delete_project(id: int, session: Session = Depends(get_session)):
