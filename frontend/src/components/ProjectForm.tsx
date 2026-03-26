@@ -1,10 +1,6 @@
-import { useMemo, useEffect } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useForm, useFieldArray, useWatch, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { toast } from 'sonner';
+import { Controller } from 'react-hook-form';
 import { Plus, Trash2 } from 'lucide-react';
+
 import {
   Select,
   SelectContent,
@@ -16,24 +12,8 @@ import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
-import { useSkeinsStore } from '@/store/skeins.store';
-import { api } from '@/api/api';
+import { useProjectForm } from '@/hooks/useProjectForm';
 import type { ProjectItem } from '@/lib/types';
-
-// Static schema for type derivation only
-// TODO move to separate files
-const projectSchemaBase = z.object({
-  name: z.string().min(1, 'Name is required'),
-  category: z.string().min(1, 'Category is required'),
-  skeins: z.array(
-    z.object({
-      skein_id: z.number().positive('Please select a skein'),
-      weight_required: z.number({ error: 'Required' }).positive('Must be positive'),
-    })
-  ),
-});
-
-export type ProjectFormData = z.infer<typeof projectSchemaBase>;
 
 interface ProjectFormProps {
   onClose: () => void;
@@ -41,129 +21,27 @@ interface ProjectFormProps {
 }
 
 export function ProjectForm({ onClose, project }: ProjectFormProps) {
-  const { grouped, fetch } = useSkeinsStore();
-
-  useEffect(() => {
-    fetch();
-  }, [fetch]);
-
-  const { data: categories = [] } = useQuery({
-    queryKey: ['categories'],
-    queryFn: api.getCategories,
-  });
-
-  const { data: existingProjects = [] } = useQuery({
-    queryKey: ['projects'],
-    queryFn: api.getProjects,
-  });
-
-  const allSkeins = useMemo(
-    () =>
-      Object.values(grouped).flatMap((brandSkeins) =>
-        Object.values(brandSkeins).flatMap((variants) => variants),
-      ),
-    [grouped],
-  );
-
-  // Total weight committed to existing projects per skein
-  const usedWeightPerSkein = useMemo(() => {
-    const map: Record<number, number> = {};
-    for (const p of existingProjects) {
-      if (project && p.id === project.id) continue;
-      for (const s of p.skeins) {
-        map[s.skein_id] = (map[s.skein_id] ?? 0) + s.weight_required;
-      }
-    }
-    return map;
-  }, [existingProjects, project]);
-
-  const resolver = useMemo(
-    () =>
-      zodResolver(
-        projectSchemaBase.extend({
-          skeins: z
-            .array(
-              z.object({
-                skein_id: z.number().positive('Please select a skein'),
-                weight_required: z.number({ error: 'Required' }).positive('Must be positive'),
-              }),
-            )
-            .superRefine((skeins, ctx) => {
-              skeins.forEach((item, index) => {
-                const skein = allSkeins.find((s) => s.id === item.skein_id);
-                if (skein && item.weight_required > 0) {
-                  const remaining = skein.weight - (usedWeightPerSkein[skein.id] ?? 0);
-                  if (item.weight_required > remaining) {
-                    ctx.addIssue({
-                      code: 'custom',
-                      message: `Only ${remaining}g available`,
-                      path: [index, 'weight_required'],
-                    });
-                  }
-                }
-              });
-            }),
-        }),
-      ),
-    [allSkeins, usedWeightPerSkein],
-  );
-
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors, isDirty },
-  } = useForm<ProjectFormData>({
-    resolver,
-    defaultValues: project
-      ? { name: project.name, category: project.category, skeins: project.skeins.map((s) => ({ skein_id: s.skein_id, weight_required: s.weight_required })) }
-      : { name: '', category: '', skeins: [] },
-  });
-
-  const { fields, append, remove } = useFieldArray({ control, name: 'skeins' });
-
-  const watchedSkeins = useWatch({ control, name: 'skeins' });
-
-  const queryClient = useQueryClient();
-
-  const onSuccess = (message: string) => {
-    toast.success(message);
-    queryClient.invalidateQueries({ queryKey: ['projects'] });
-    onClose();
-  };
-  const onError = (error: Error) => toast.error(error.message);
-
-  const createMutation = useMutation({
-    mutationFn: api.createProject,
-    onSuccess: () => onSuccess('Project created!'),
-    onError,
-  });
-
-  const updateMutation = useMutation({
-    mutationFn: (data: ProjectFormData) => api.updateProject(project!.id, data),
-    onSuccess: () => onSuccess('Project updated!'),
-    onError,
-  });
-
-  const mutation = project ? updateMutation : createMutation;
-
-  // Per-row: exclude skeins already picked in other rows, and those fully used in other projects
-  const getOptionsForRow = (index: number) => {
-    const selectedElsewhere = new Set(
-      watchedSkeins
-        ?.filter((_, i) => i !== index)
-        .map((s) => s.skein_id)
-        .filter((id) => id > 0),
-    );
-    return allSkeins.filter((skein) => {
-      if (selectedElsewhere.has(skein.id)) return false;
-      const remaining = skein.weight - (usedWeightPerSkein[skein.id] ?? 0);
-      return remaining > 0;
-    });
-  };
+    errors,
+    isDirty,
+    fields,
+    append,
+    remove,
+    watchedSkeins,
+    allSkeins,
+    usedWeightPerSkein,
+    getOptionsForRow,
+    categories,
+    isPending,
+    isEditing,
+    onSubmit,
+  } = useProjectForm({ project, onClose });
 
   return (
-    <form onSubmit={handleSubmit((data) => mutation.mutate(data))}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-6">
         <FieldGroup>
           <Field>
@@ -294,8 +172,8 @@ export function ProjectForm({ onClose, project }: ProjectFormProps) {
           </Field>
         </FieldGroup>
 
-        <Button type="submit" className="w-full" disabled={mutation.isPending || !isDirty}>
-          {mutation.isPending ? 'Saving...' : project ? 'Save changes' : 'Save project'}
+        <Button type="submit" className="w-full" disabled={isPending || !isDirty}>
+          {isPending ? 'Saving...' : isEditing ? 'Save changes' : 'Save project'}
         </Button>
       </div>
     </form>

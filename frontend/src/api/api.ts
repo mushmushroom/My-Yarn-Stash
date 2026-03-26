@@ -1,7 +1,6 @@
 import { API_ENDPOINTS } from '@/lib/constants';
 import http from './http';
-import type { Brand, ProjectItem, SkeinItem, SkeinCreateData, SkeinSuggestion } from '@/lib/types';
-import type { ProjectFormData } from '@/components/ProjectForm';
+import type { Brand, ProjectItem, SkeinItem, SkeinCreateData, SkeinSuggestion, ProjectFormData } from '@/lib/types';
 
 export class Api {
   async getBrands(): Promise<Brand[]> {

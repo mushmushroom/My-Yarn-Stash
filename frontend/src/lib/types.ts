@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import type { skeinSchema } from '@/schemas/skein.schema';
+import type { projectSchemaBase } from '@/schemas/project.schema';
 
 // Brands
 export interface Brand {
@@ -78,3 +79,7 @@ interface ProjectSkeinItem {
   yardage: string;
   yardage_unit: string;
 }
+
+// Project Form
+export type ProjectFormData = z.infer<typeof projectSchemaBase>;
+
