@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { SkeinItem, SkeinCreateData, Filters } from '@/lib/types';
 import { api } from '@/api/api';
+import { useFiltersStore } from '@/store/filters.store';
 
 interface SkeinsState {
   grouped: Record<string, Record<string, SkeinItem[]>>;
@@ -35,16 +36,16 @@ export const useSkeinsStore = create<SkeinsState>((set, get) => ({
 
   create: async (data: SkeinCreateData) => {
     await api.createSkein(data);
-    await get().fetch();
+    await get().fetch(useFiltersStore.getState().filters);
   },
 
   update: async (id: number, data: SkeinCreateData) => {
     await api.updateSkein(id, data);
-    await get().fetch();
+    await get().fetch(useFiltersStore.getState().filters);
   },
 
   remove: async (id: number) => {
     await api.deleteSkein(id);
-    await get().fetch();
+    await get().fetch(useFiltersStore.getState().filters);
   },
 }));
