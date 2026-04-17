@@ -7,36 +7,29 @@ import { Button } from './ui/button';
 import useBrandForm from '@/hooks/useBrandForm';
 import { Controller } from 'react-hook-form';
 
-// TODO move to separate files and hooks
 interface BrandFormProps {
   brand?: Brand;
   onClose: () => void;
 }
 export default function BrandForm({ brand, onClose }: BrandFormProps) {
-  const { mutation, handleSubmit, onSubmit, logoFile, errors, isDirty, control, register } =
+  const { mutation, handleSubmit, onSubmit, logoPreviewUrl, errors, isDirty, control, register } =
     useBrandForm({
       brand,
       onClose,
     });
 
+  const logoSrc = logoPreviewUrl ?? (brand?.logo_filename ? `${BACKEND_URL}/static/brand-logos/${brand.logo_filename}` : null);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-6">
         <FieldGroup>
-          {logoFile instanceof File ? (
+          {logoSrc && (
             <img
               className="w-24 h-auto max-h-10 object-contain"
-              src={URL.createObjectURL(logoFile)}
-              alt="Logo preview"
+              src={logoSrc}
+              alt={logoPreviewUrl ? 'Logo preview' : brand?.name}
             />
-          ) : (
-            brand?.logo_filename && (
-              <img
-                className="w-24 h-auto max-h-10 object-contain"
-                src={`${BACKEND_URL}/static/brand-logos/${brand.logo_filename}`}
-                alt={brand.name}
-              />
-            )
           )}
 
           <Field>
@@ -63,7 +56,7 @@ export default function BrandForm({ brand, onClose }: BrandFormProps) {
           </Field>
         </FieldGroup>
         <Button type="submit" className="w-full" disabled={mutation.isPending || !isDirty}>
-          {mutation.isPending ? 'Saving...' : !brand ? 'Save changes' : 'Save brand'}
+          {mutation.isPending ? 'Saving...' : brand ? 'Save changes' : 'Save brand'}
         </Button>
       </div>
     </form>

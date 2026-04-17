@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { StashView } from '@/components/StashView';
-import { StashFilters } from '@/components/StashFilters';
-import { ProjectForm } from '@/components/ProjectForm';
-import { ProjectsView } from '@/components/ProjectsView';
+import StashView from '@/components/StashView';
+import  StashFilters  from '@/components/StashFilters';
+import  ProjectForm  from '@/components/ProjectForm';
+import  ProjectsView  from '@/components/ProjectsView';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,7 +15,7 @@ import {
 import { Plus } from 'lucide-react';
 import BrandsView from './components/BrandsView';
 import BrandForm from './components/BrandForm';
-import { SkeinForm } from './components/SkeinForm';
+import SkeinForm from './components/SkeinForm';
 
 function App() {
   const [skeinDrawerOpen, setSkeinDrawerOpen] = useState(false);
@@ -115,7 +115,7 @@ function App() {
         <TabsContent value="brands" className="flex-1 overflow-auto py-8">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold mb-6">Brands</h2>
+              <h2 className="text-xl font-semibold">Brands</h2>
               <Drawer direction="right" open={brandDrawerOpen} onOpenChange={setBrandDrawerOpen}>
                 <DrawerTrigger asChild>
                   <Button size="sm">

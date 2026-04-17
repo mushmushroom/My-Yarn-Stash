@@ -18,7 +18,6 @@ export default function useSkeinForm({ skein, onClose }: UseSkeinFormProps) {
     register,
     handleSubmit,
     control,
-    reset,
     setValue,
     formState: { errors, isDirty },
   } = useForm<SkeinFormData>({
@@ -63,7 +62,6 @@ export default function useSkeinForm({ skein, onClose }: UseSkeinFormProps) {
     mutation,
     setValue,
     register,
-    reset,
     handleSubmit,
     control,
     errors,

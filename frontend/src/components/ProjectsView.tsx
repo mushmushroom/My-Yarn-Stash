@@ -10,11 +10,11 @@ import {
   DrawerTitle,
 } from '@/components/ui/drawer';
 import { api } from '@/api/api';
-import { ProjectForm } from '@/components/ProjectForm';
-import { DeleteConfirmDrawer } from '@/components/DeleteConfirmDrawer';
+import  ProjectForm  from '@/components/ProjectForm';
+import  DeleteConfirmDrawer  from '@/components/DeleteConfirmDrawer';
 import type { ProjectItem } from '@/lib/types';
 
-export function ProjectsView() {
+export default function ProjectsView() {
   const queryClient = useQueryClient();
   const [editingProject, setEditingProject] = useState<ProjectItem | null>(null);
   const [confirmingProject, setConfirmingProject] = useState<ProjectItem | null>(null);

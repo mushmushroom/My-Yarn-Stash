@@ -15,7 +15,7 @@ interface UseProjectFormProps {
   onClose: () => void;
 }
 
-export function useProjectForm({ project, onClose }: UseProjectFormProps) {
+export default function useProjectForm({ project, onClose }: UseProjectFormProps) {
   const { grouped, fetch } = useSkeinsStore();
 
   useEffect(() => {

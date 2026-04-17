@@ -12,7 +12,7 @@ import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
-import { useProjectForm } from '@/hooks/useProjectForm';
+import  useProjectForm  from '@/hooks/useProjectForm';
 import type { ProjectItem } from '@/lib/types';
 
 interface ProjectFormProps {
@@ -20,7 +20,7 @@ interface ProjectFormProps {
   project?: ProjectItem;
 }
 
-export function ProjectForm({ onClose, project }: ProjectFormProps) {
+export default function ProjectForm({ onClose, project }: ProjectFormProps) {
   const {
     register,
     handleSubmit,

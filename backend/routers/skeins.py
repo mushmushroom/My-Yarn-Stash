@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlmodel import Session, select
+from sqlalchemy import func
 from database import get_session
 import webcolors
 
-from models import  ProjectSkeinLink, SkeinCreate, Skein, SkeinRead, SkeinUpdate, SkeinSuggestion
+from models import Brand, ProjectSkeinLink, SkeinCreate, Skein, SkeinRead, SkeinUpdate, SkeinSuggestion
 
 COLOR_CANDIDATES = frozenset({
     'black', 'white', 'gray', 'red', 'orange', 'yellow',
@@ -48,7 +49,11 @@ def get_skein_names(session: Session = Depends(get_session)):
 
 @router.get('', response_model=dict[str, dict[str, list[SkeinRead]]])
 def get_skeins(session: Session = Depends(get_session), brand: list[str] | None = Query(default=None), skip_reserved: bool = False, colors: list[str] | None = Query(default=None), fibers: list[str] | None = Query(default=None)):
-    skeins = session.exec(select(Skein)).all()
+    stmt = select(Skein).outerjoin(Brand, Skein.brand_id == Brand.id)
+    if brand:
+        stmt = stmt.where(Brand.name.in_(brand))
+    skeins = session.exec(stmt).all()
+
     used_weight: dict[int, int] = {}
     if skip_reserved:
         for link in session.exec(select(ProjectSkeinLink)).all():
@@ -57,8 +62,6 @@ def get_skeins(session: Session = Depends(get_session), brand: list[str] | None 
     grouped: dict[str, dict[str, list[Skein]]] = {}
     for skein in skeins:
         skein_brand = skein.brand.name if skein.brand else ""
-        if brand and skein_brand not in brand:
-            continue
         if fibers and not any(item in fibers for item in (skein.fibers or [])):
             continue
         if skip_reserved and skein.weight - used_weight.get(skein.id, 0) <= 0:

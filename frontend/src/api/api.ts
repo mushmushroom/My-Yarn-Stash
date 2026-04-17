@@ -7,8 +7,8 @@ import type {
   SkeinCreateData,
   SkeinSuggestion,
   ProjectFormData,
+  BrandFormData,
 } from '@/lib/types';
-import type { BrandFormData } from '@/components/BrandForm';
 
 export class Api {
   async getBrands(): Promise<Brand[]> {

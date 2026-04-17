@@ -1,17 +1,14 @@
 import useFetchBrands from '@/hooks/useFetchBrands';
-import { BrandCard } from './BrandCard';
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from './ui/drawer';
-import BrandForm from './BrandForm';
+import  BrandCard  from '@/components/BrandCard';
 import { useState } from 'react';
 import type { Brand } from '@/lib/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { api } from '@/api/api';
-import { DeleteConfirmDrawer } from './DeleteConfirmDrawer';
+import  DeleteConfirmDrawer  from '@/components/DeleteConfirmDrawer';
 
 export default function BrandsView() {
   const { data: brands, isLoading, isError } = useFetchBrands();
-  const [editingBrand, setEditingBrand] = useState<Brand | null>(null);
   const [confirmingBrand, setConfirmingBrand] = useState<Brand | null>(null);
   const [removeSkeins, setRemoveSkeins] = useState(false);
 
@@ -94,23 +91,6 @@ export default function BrandsView() {
         </div>
       </DeleteConfirmDrawer>
 
-      {/* Edit brand */}
-      <Drawer
-        open={!!editingBrand}
-        onOpenChange={(open) => { if (!open) setEditingBrand(null); }}
-        direction="right"
-      >
-        <DrawerContent>
-          <DrawerHeader>
-            <DrawerTitle>Edit brand</DrawerTitle>
-          </DrawerHeader>
-          <div className="px-4 pb-4">
-            {editingBrand && (
-              <BrandForm brand={editingBrand} onClose={() => setEditingBrand(null)} />
-            )}
-          </div>
-        </DrawerContent>
-      </Drawer>
     </>
   );
 }

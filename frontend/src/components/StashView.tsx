@@ -3,12 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import { useSkeinsStore } from '@/store/skeins.store';
 import { BACKEND_URL } from '@/lib/constants';
 import { useFiltersStore } from '@/store/filters.store';
-import { useRemoveSkein } from '@/hooks/useRemoveSkein';
-import { SkeinCard } from '@/components/SkeinCard';
+import  useRemoveSkein  from '@/hooks/useRemoveSkein';
+import  SkeinCard  from '@/components/SkeinCard';
 import { api } from '@/api/api';
 import type { ProjectItem } from '@/lib/types';
 
-export function StashView() {
+export default function StashView() {
   const { grouped, isLoading, isError, fetch } = useSkeinsStore();
   const { filters } = useFiltersStore();
   const { removing, handleRemove } = useRemoveSkein();

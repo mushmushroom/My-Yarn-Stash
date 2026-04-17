@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Trash2, Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/components/ui/drawer';
-import { DeleteConfirmDrawer } from '@/components/DeleteConfirmDrawer';
+import  DeleteConfirmDrawer  from '@/components/DeleteConfirmDrawer';
 import type { SkeinItem } from '@/lib/types';
-import { SkeinForm } from './SkeinForm';
+import  SkeinForm  from './SkeinForm';
 
 interface SkeinCardProps {
   skein: SkeinItem;
@@ -13,7 +13,7 @@ interface SkeinCardProps {
   onRemove: () => void;
 }
 
-export function SkeinCard({ skein, usedWeight, removing, onRemove }: SkeinCardProps) {
+export default function SkeinCard({ skein, usedWeight, removing, onRemove }: SkeinCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
   const remaining = skein.weight - usedWeight;

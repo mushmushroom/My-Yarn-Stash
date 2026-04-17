@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Controller } from 'react-hook-form';
 import { ColorPicker } from '@/components/ui/color-picker';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
-import { AutocompleteInput } from '@/components/ui/autocomplete-input';
+import  AutocompleteInput  from '@/components/ui/autocomplete-input';
 import {
   Select,
   SelectContent,
@@ -15,7 +15,7 @@ import {
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { FiberChips } from '@/components/ui/fiber-chips';
+import  FiberChips  from '@/components/ui/fiber-chips';
 import { api } from '@/api/api';
 import useFetchBrands from '@/hooks/useFetchBrands';
 import useFetchFibers from '@/hooks/useFetchFibers';
@@ -27,16 +27,13 @@ interface SkeinFormProps {
   onClose: () => void;
 }
 
-export function SkeinForm({ skein, onClose }: SkeinFormProps) {
-  // ========= NEW
+export default function SkeinForm({ skein, onClose }: SkeinFormProps) {
   const { isDirty, control, register, onSubmit, handleSubmit, errors, setValue, mutation } =
     useSkeinForm({
       skein,
       onClose,
     });
-  
-  // =============
-  const { data: brands = [], isLoading: isBrandsLoading } = useFetchBrands();
+    const { data: brands = [], isLoading: isBrandsLoading } = useFetchBrands();
   const { data: fibers = [], isLoading: isFibersLoading } = useFetchFibers();
 
   const { data: yardageUnits = [], isLoading: isYardageUnitsLoading } = useQuery({
@@ -211,7 +208,7 @@ export function SkeinForm({ skein, onClose }: SkeinFormProps) {
         </FieldGroup>
 
         <Button type="submit" className="w-full" disabled={mutation.isPending || !isDirty}>
-          {mutation.isPending ? 'Saving...' : !skein ? 'Save changes' : 'Save skein'}
+          {mutation.isPending ? 'Saving...' : skein ? 'Save changes' : 'Save skein'}
         </Button>
 
         {errors && <p className="text-sm text-destructive text-center">{mutation.error?.message}</p>}

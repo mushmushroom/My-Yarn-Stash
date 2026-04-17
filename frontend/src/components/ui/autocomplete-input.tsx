@@ -13,7 +13,7 @@ interface AutocompleteInputProps extends Omit<React.ComponentProps<typeof Input>
   onSelect: (value: string) => void;
 }
 
-export function AutocompleteInput({ options, onSelect, onChange, value, ...props }: AutocompleteInputProps) {
+export default function AutocompleteInput({ options, onSelect, onChange, value, ...props }: AutocompleteInputProps) {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState(String(value ?? ''));
   const closeTimeout = useRef<ReturnType<typeof setTimeout>>(null);

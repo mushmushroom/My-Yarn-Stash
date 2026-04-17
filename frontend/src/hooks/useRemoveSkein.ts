@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { useSkeinsStore } from '@/store/skeins.store';
 
-export function useRemoveSkein() {
+export default function useRemoveSkein() {
   const { remove } = useSkeinsStore();
   const [removing, setRemoving] = useState<number | null>(null);
 

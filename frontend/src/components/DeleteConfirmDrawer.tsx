@@ -11,7 +11,7 @@ interface DeleteConfirmDrawerProps {
   children?: React.ReactNode;
 }
 
-export function DeleteConfirmDrawer({
+export default function DeleteConfirmDrawer({
   open,
   onOpenChange,
   title,

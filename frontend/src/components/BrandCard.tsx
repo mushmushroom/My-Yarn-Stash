@@ -12,7 +12,7 @@ interface BrandCardProps {
   onRemove: () => void;
 }
 
-export function BrandCard({ brand, removing, onRemove }: BrandCardProps) {
+export default function BrandCard({ brand, removing, onRemove }: BrandCardProps) {
   const [isEditing, setIsEditing] = useState(false);
 
   return (

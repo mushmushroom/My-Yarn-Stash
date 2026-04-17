@@ -14,9 +14,9 @@ import { useMemo } from 'react';
 import { COLOR_MAP } from '@/lib/constants';
 import useFetchBrands from '@/hooks/useFetchBrands';
 import useFetchFibers from '@/hooks/useFetchFibers';
-import { FiberChips } from '@/components/ui/fiber-chips';
+import  FiberChips  from '@/components/ui/fiber-chips';
 
-export function StashFilters() {
+export default function StashFilters() {
   const { filters, setFilters, clearFilters } = useFiltersStore();
 
   const { data: brands = [] } = useFetchBrands();

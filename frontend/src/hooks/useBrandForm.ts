@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -25,6 +26,17 @@ export default function useBrandForm({ brand, onClose }: UseBrandFormProps) {
 
   const logoFile = useWatch({ control, name: 'logo' });
 
+  const [logoPreviewUrl, setLogoPreviewUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (!(logoFile instanceof File)) {
+      setLogoPreviewUrl(null);
+      return;
+    }
+    const url = URL.createObjectURL(logoFile);
+    setLogoPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [logoFile]);
+
   const queryClient = useQueryClient();
 
   const onSuccess = (message: string) => {
@@ -50,5 +62,5 @@ export default function useBrandForm({ brand, onClose }: UseBrandFormProps) {
 
   const onSubmit = (data: BrandFormData) => mutation.mutate(data);
 
-  return { mutation, onSubmit, handleSubmit, logoFile, errors, isDirty, control, register };
+  return { mutation, onSubmit, handleSubmit, logoPreviewUrl, errors, isDirty, control, register };
 }

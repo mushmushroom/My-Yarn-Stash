@@ -7,7 +7,7 @@ interface FiberChipsProps {
   isLoading?: boolean;
 }
 
-export function FiberChips({ fibers, selected, onToggle, isLoading }: FiberChipsProps) {
+export default function FiberChips({ fibers, selected, onToggle, isLoading }: FiberChipsProps) {
   if (isLoading) return <p className="text-sm text-muted-foreground">Loading...</p>;
   return (
     <div className="flex flex-wrap gap-2">
