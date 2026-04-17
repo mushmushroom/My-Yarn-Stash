@@ -125,7 +125,7 @@ export function ProjectForm({ onClose, project }: ProjectFormProps) {
                                           style={{ backgroundColor: skein.color }}
                                         />
                                         <span className="whitespace-normal break-words min-w-0">
-                                          {skein.brand.name} — {skein.name}
+                                          {skein.brand?.name ?? 'No brand'} — {skein.name}
                                         </span>
                                       </div>
                                     </SelectItem>

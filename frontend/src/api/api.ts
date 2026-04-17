@@ -1,11 +1,39 @@
 import { API_ENDPOINTS } from '@/lib/constants';
 import http from './http';
-import type { Brand, ProjectItem, SkeinItem, SkeinCreateData, SkeinSuggestion, ProjectFormData } from '@/lib/types';
+import type {
+  Brand,
+  ProjectItem,
+  SkeinItem,
+  SkeinCreateData,
+  SkeinSuggestion,
+  ProjectFormData,
+} from '@/lib/types';
+import type { BrandFormData } from '@/components/BrandForm';
 
 export class Api {
   async getBrands(): Promise<Brand[]> {
     const response = await http.get(API_ENDPOINTS.BRANDS);
     return response.data;
+  }
+
+  async createBrand(data: BrandFormData) {
+    const formData = new FormData();
+    formData.append('name', data.name);
+    if (data.logo) formData.append('logo', data.logo);
+    const response = await http.post(API_ENDPOINTS.BRANDS, formData);
+    return response.data;
+  }
+
+  async updateBrand(id: number, data: BrandFormData): Promise<Brand[]> {
+    const formData = new FormData();
+    formData.append('name', data.name);
+    if (data.logo) formData.append('logo', data.logo);
+    const response = await http.patch(`${API_ENDPOINTS.BRANDS}/${id}`, formData);
+    return response.data;
+  }
+
+  async deleteBrand({ id, removeSkeins }: { id: number; removeSkeins: boolean }) {
+    await http.delete(`${API_ENDPOINTS.BRANDS}/${id}`, { params: { remove_skeins: removeSkeins } });
   }
 
   async getYardageUnits(): Promise<string[]> {

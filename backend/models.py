@@ -40,6 +40,7 @@ class Fiber(str, Enum):
 # =========================================
 class BrandCreate(SQLModel):
   name: str
+  logo_filename: str | None = None
 
 
 # TABLE
@@ -48,6 +49,10 @@ class Brand(BrandCreate, table=True):
   skeins: list["Skein"] = Relationship(back_populates="brand")
 
 
+class BrandUpdate(SQLModel):
+  name: str | None = None
+  logo_filename: str | None = None
+  
 # =========================================
 # ProjectSkeinLink
 # =========================================
@@ -64,7 +69,7 @@ class ProjectSkeinLink(SQLModel, table=True):
 # =========================================
 class SkeinCreate(SQLModel):
   name: str
-  brand_id: int
+  brand_id: int | None = None
   color: str
   weight: int
   yardage: str
@@ -75,7 +80,7 @@ class SkeinCreate(SQLModel):
 
 class SkeinRead(SkeinCreate):
   id: int
-  brand: Brand
+  brand: Brand | None = None
 
 
 class SkeinUpdate(SQLModel):
@@ -99,7 +104,7 @@ class SkeinSuggestion(SQLModel):
 # TABLE
 class Skein(SkeinCreate, table=True):
   id: int | None = Field(default=None, primary_key=True)
-  brand_id: int = Field(foreign_key="brand.id")
+  brand_id: int | None = Field(default=None, foreign_key="brand.id", nullable=True)
   brand: Brand | None = Relationship(back_populates="skeins")
   yardage_unit: YardageUnit = Field(
     sa_column=Column(SAEnum(YardageUnit, values_callable=lambda x: [e.value for e in x]))
@@ -129,7 +134,7 @@ class ProjectSkeinRead(SQLModel):
   skein_id: int
   weight_required: int
   name: str
-  brand: Brand
+  brand: Brand | None = None
   color: str
   weight: int
   yardage: str

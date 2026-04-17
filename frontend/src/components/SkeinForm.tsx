@@ -1,7 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { Controller } from 'react-hook-form';
-import type { Control, UseFormRegister, UseFormSetValue, FieldErrors, UseFormHandleSubmit } from 'react-hook-form';
-import type { SubmitHandler } from 'react-hook-form';
 import { ColorPicker } from '@/components/ui/color-picker';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { AutocompleteInput } from '@/components/ui/autocomplete-input';
@@ -21,33 +19,23 @@ import { FiberChips } from '@/components/ui/fiber-chips';
 import { api } from '@/api/api';
 import useFetchBrands from '@/hooks/useFetchBrands';
 import useFetchFibers from '@/hooks/useFetchFibers';
-import type { SkeinFormData } from '@/lib/types';
+import type { SkeinItem } from '@/lib/types';
+import useSkeinForm from '@/hooks/useSkeinForm';
 
 interface SkeinFormProps {
-  control: Control<SkeinFormData>;
-  register: UseFormRegister<SkeinFormData>;
-  setValue: UseFormSetValue<SkeinFormData>;
-  errors: FieldErrors<SkeinFormData>;
-  handleSubmit: UseFormHandleSubmit<SkeinFormData>;
-  onSubmit: SubmitHandler<SkeinFormData>;
-  isPending: boolean;
-  isDirty: boolean;
-  submitError: string | null;
-  submitLabel: string;
+  skein?: SkeinItem;
+  onClose: () => void;
 }
 
-export function SkeinForm({
-  control,
-  register,
-  setValue,
-  errors,
-  handleSubmit,
-  onSubmit,
-  isPending,
-  isDirty,
-  submitError,
-  submitLabel,
-}: SkeinFormProps) {
+export function SkeinForm({ skein, onClose }: SkeinFormProps) {
+  // ========= NEW
+  const { isDirty, control, register, onSubmit, handleSubmit, errors, setValue, mutation } =
+    useSkeinForm({
+      skein,
+      onClose,
+    });
+  
+  // =============
   const { data: brands = [], isLoading: isBrandsLoading } = useFetchBrands();
   const { data: fibers = [], isLoading: isFibersLoading } = useFetchFibers();
 
@@ -62,7 +50,7 @@ export function SkeinForm({
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit, (errors) => console.log('Validation errors:', errors))}>
       <div className="space-y-6">
         <FieldGroup>
           <Field>
@@ -151,9 +139,7 @@ export function SkeinForm({
                 />
                 <InputGroupAddon align="inline-end">g</InputGroupAddon>
               </InputGroup>
-              {errors.weight && (
-                <p className="text-sm text-destructive">{errors.weight.message}</p>
-              )}
+              {errors.weight && <p className="text-sm text-destructive">{errors.weight.message}</p>}
             </Field>
 
             <Field>
@@ -174,9 +160,7 @@ export function SkeinForm({
                       onValueChange={field.onChange}
                     >
                       <SelectTrigger className="w-20">
-                        <SelectValue
-                          placeholder={isYardageUnitsLoading ? 'Loading...' : '50g'}
-                        />
+                        <SelectValue placeholder={isYardageUnitsLoading ? 'Loading...' : '50g'} />
                       </SelectTrigger>
                       <SelectContent>
                         {yardageUnits.map((yu) => (
@@ -226,11 +210,11 @@ export function SkeinForm({
           </Field>
         </FieldGroup>
 
-        <Button type="submit" className="w-full" disabled={isPending || !isDirty}>
-          {isPending ? 'Saving...' : submitLabel}
+        <Button type="submit" className="w-full" disabled={mutation.isPending || !isDirty}>
+          {mutation.isPending ? 'Saving...' : !skein ? 'Save changes' : 'Save skein'}
         </Button>
 
-        {submitError && <p className="text-sm text-destructive text-center">{submitError}</p>}
+        {errors && <p className="text-sm text-destructive text-center">{mutation.error?.message}</p>}
       </div>
     </form>
   );

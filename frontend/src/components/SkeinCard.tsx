@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Trash2, Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/components/ui/drawer';
-import { EditSkeinForm } from '@/components/EditSkeinForm';
+import { DeleteConfirmDrawer } from '@/components/DeleteConfirmDrawer';
 import type { SkeinItem } from '@/lib/types';
+import { SkeinForm } from './SkeinForm';
 
 interface SkeinCardProps {
   skein: SkeinItem;
@@ -14,6 +15,7 @@ interface SkeinCardProps {
 
 export function SkeinCard({ skein, usedWeight, removing, onRemove }: SkeinCardProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false);
   const remaining = skein.weight - usedWeight;
 
   return (
@@ -55,7 +57,7 @@ export function SkeinCard({ skein, usedWeight, removing, onRemove }: SkeinCardPr
             size="icon-sm"
             className="shrink-0 text-muted-foreground hover:text-destructive"
             disabled={removing}
-            onClick={onRemove}
+            onClick={() => setIsConfirming(true)}
             aria-label="Delete skein"
           >
             <Trash2 />
@@ -63,13 +65,22 @@ export function SkeinCard({ skein, usedWeight, removing, onRemove }: SkeinCardPr
         </div>
       </div>
 
+      <DeleteConfirmDrawer
+        open={isConfirming}
+        onOpenChange={setIsConfirming}
+        title="Delete skein?"
+        description={`This will permanently remove "${skein.name}" from your stash. This action cannot be undone.`}
+        isPending={removing}
+        onConfirm={() => { setIsConfirming(false); onRemove(); }}
+      />
+
       <Drawer open={isEditing} onOpenChange={setIsEditing} direction="right">
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>Edit skein</DrawerTitle>
           </DrawerHeader>
           <div className="px-4 pb-4 overflow-auto">
-            <EditSkeinForm skein={skein} onClose={() => setIsEditing(false)} />
+            <SkeinForm skein={skein} onClose={() => setIsEditing(false)} />
           </div>
         </DrawerContent>
       </Drawer>

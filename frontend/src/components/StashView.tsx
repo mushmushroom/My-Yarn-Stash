@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useSkeinsStore } from '@/store/skeins.store';
-import { brandLogos } from '@/lib/constants';
+import { BACKEND_URL } from '@/lib/constants';
 import { useFiltersStore } from '@/store/filters.store';
 import { useRemoveSkein } from '@/hooks/useRemoveSkein';
 import { SkeinCard } from '@/components/SkeinCard';
@@ -36,6 +36,7 @@ export function StashView() {
   if (isError) return <p className="text-destructive text-sm">Failed to load stash.</p>;
 
   const entries = Object.entries(grouped);
+  console.log(entries);
 
   if (entries.length === 0) {
     return <p className="text-muted-foreground text-sm">No skeins added yet.</p>;
@@ -45,14 +46,14 @@ export function StashView() {
       {entries.map(([brandName, skeins]) => (
         <div key={brandName}>
           <div className="flex items-center gap-3 mb-4">
-            {brandLogos[brandName] ? (
+            {Object.values(skeins)[0]?.[0]?.brand?.logo_filename ? (
               <img
-                src={brandLogos[brandName]}
+                src={`${BACKEND_URL}/static/brand-logos/${Object.values(skeins)[0][0].brand!.logo_filename}`}
                 alt={brandName}
                 className="w-24 h-auto max-h-10 object-contain"
               />
             ) : (
-              <span className="text-base font-semibold">{brandName}</span>
+              <span className="text-base font-semibold">{brandName || 'No brand'}</span>
             )}
           </div>
 

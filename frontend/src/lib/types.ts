@@ -7,14 +7,20 @@ import type { projectSchemaBase } from '@/schemas/project.schema';
 export interface Brand {
   id: number;
   name: string;
+  logo_filename: string | null;
+}
+
+export interface BrandFormData {
+  name: string;
+  logo?: File;
 }
 
 // Skeins
 export interface SkeinItem {
   id: number;
   name: string;
-  brand_id: number;
-  brand: Brand;
+  brand_id: number | null;
+  brand: Brand | null;
   color: string;
   weight: number;
   yardage: string;
@@ -32,13 +38,13 @@ export interface SkeinSuggestion {
 
 export interface SkeinCreateData {
   name: string;
-  brand_id: number;
+  brand_id?: number | null;
   color: string;
   weight: number;
   yardage: string;
   yardage_unit: string;
-  fibers?: string[];
-  comment?: string;
+  fibers?: string[] | null;
+  comment?: string | null;
 }
 
 export type SkeinFormData = z.infer<typeof skeinSchema>;
@@ -73,7 +79,7 @@ interface ProjectSkeinItem {
   skein_id: number;
   weight_required: number;
   name: string;
-  brand: Brand;
+  brand: Brand | null;
   color: string;
   weight: number;
   yardage: string;

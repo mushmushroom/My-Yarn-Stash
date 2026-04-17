@@ -11,12 +11,13 @@ import {
 } from '@/components/ui/drawer';
 import { api } from '@/api/api';
 import { ProjectForm } from '@/components/ProjectForm';
+import { DeleteConfirmDrawer } from '@/components/DeleteConfirmDrawer';
 import type { ProjectItem } from '@/lib/types';
 
 export function ProjectsView() {
   const queryClient = useQueryClient();
   const [editingProject, setEditingProject] = useState<ProjectItem | null>(null);
-  const [deletingProjectId, setDeletingProjectId] = useState<number | null>(null)
+  const [confirmingProject, setConfirmingProject] = useState<ProjectItem | null>(null);
 
   const { data: projects = [], isLoading, isError } = useQuery({
     queryKey: ['projects'],
@@ -27,12 +28,12 @@ export function ProjectsView() {
     mutationFn: api.deleteProject,
     onSuccess: () => {
       toast.success('Project removed');
-      setDeletingProjectId(null);
+      setConfirmingProject(null);
       queryClient.invalidateQueries({ queryKey: ['projects'] });
     },
     onError: () => {
       toast.error('Failed to delete project');
-      setDeletingProjectId(null);
+      setConfirmingProject(null);
     },
   });
 
@@ -69,8 +70,8 @@ export function ProjectsView() {
                   variant="ghost"
                   size="icon-sm"
                   className="text-muted-foreground hover:text-destructive"
-                  disabled={deletingProjectId === project.id}
-                  onClick={() => { setDeletingProjectId(project.id); deleteMutation.mutate(project.id); }}
+                  disabled={deleteMutation.isPending && confirmingProject?.id === project.id}
+                  onClick={() => setConfirmingProject(project)}
                 >
                   <Trash2 />
                 </Button>
@@ -88,7 +89,7 @@ export function ProjectsView() {
                       className="size-3 rounded-full border border-border shrink-0 inline-block"
                       style={{ backgroundColor: skein.color }}
                     />
-                    <span>{skein.brand.name} — {skein.name}</span>
+                    <span>{skein.brand?.name ?? 'No brand'} — {skein.name}</span>
                     <span className="text-muted-foreground">· {skein.weight_required}g</span>
                   </div>
                 ))}
@@ -97,6 +98,15 @@ export function ProjectsView() {
           </div>
         ))}
       </div>
+
+      <DeleteConfirmDrawer
+        open={!!confirmingProject}
+        onOpenChange={(open) => { if (!open) setConfirmingProject(null); }}
+        title={`Delete "${confirmingProject?.name}"?`}
+        description="This project will be permanently deleted. Your skeins will remain in your stash."
+        isPending={deleteMutation.isPending}
+        onConfirm={() => deleteMutation.mutate(confirmingProject!.id)}
+      />
 
       <Drawer open={!!editingProject} onOpenChange={(open) => { if (!open) setEditingProject(null); }} direction="right">
         <DrawerContent>

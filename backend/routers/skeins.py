@@ -56,7 +56,7 @@ def get_skeins(session: Session = Depends(get_session), brand: list[str] | None 
 
     grouped: dict[str, dict[str, list[Skein]]] = {}
     for skein in skeins:
-        skein_brand = skein.brand.name
+        skein_brand = skein.brand.name if skein.brand else ""
         if brand and skein_brand not in brand:
             continue
         if fibers and not any(item in fibers for item in (skein.fibers or [])):

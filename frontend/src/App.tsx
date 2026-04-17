@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { AddYarnForm } from '@/components/AddYarnForm';
 import { StashView } from '@/components/StashView';
 import { StashFilters } from '@/components/StashFilters';
 import { ProjectForm } from '@/components/ProjectForm';
@@ -14,10 +13,14 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { Plus } from 'lucide-react';
+import BrandsView from './components/BrandsView';
+import BrandForm from './components/BrandForm';
+import { SkeinForm } from './components/SkeinForm';
 
 function App() {
   const [skeinDrawerOpen, setSkeinDrawerOpen] = useState(false);
   const [projectDrawerOpen, setProjectDrawerOpen] = useState(false);
+  const [brandDrawerOpen, setBrandDrawerOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
@@ -38,6 +41,12 @@ function App() {
                   className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-4"
                 >
                   Projects
+                </TabsTrigger>
+                <TabsTrigger
+                  value="brands"
+                  className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-4"
+                >
+                  Brands
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -62,7 +71,7 @@ function App() {
                       <DrawerTitle>Add new skein</DrawerTitle>
                     </DrawerHeader>
                     <div className="px-4 pb-4 overflow-auto">
-                      <AddYarnForm onClose={() => setSkeinDrawerOpen(false)} />
+                      <SkeinForm onClose={() => setSkeinDrawerOpen(false)} />
                     </div>
                   </DrawerContent>
                 </Drawer>
@@ -77,7 +86,11 @@ function App() {
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold">Projects</h2>
-              <Drawer direction="right" open={projectDrawerOpen} onOpenChange={setProjectDrawerOpen}>
+              <Drawer
+                direction="right"
+                open={projectDrawerOpen}
+                onOpenChange={setProjectDrawerOpen}
+              >
                 <DrawerTrigger asChild>
                   <Button size="sm">
                     <Plus className="size-4 mr-1" />
@@ -96,6 +109,31 @@ function App() {
             </div>
 
             <ProjectsView />
+          </div>
+        </TabsContent>
+
+        <TabsContent value="brands" className="flex-1 overflow-auto py-8">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-semibold mb-6">Brands</h2>
+              <Drawer direction="right" open={brandDrawerOpen} onOpenChange={setBrandDrawerOpen}>
+                <DrawerTrigger asChild>
+                  <Button size="sm">
+                    <Plus className="size-4 mr-1" />
+                    Add brand
+                  </Button>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <DrawerHeader>
+                    <DrawerTitle>New brand</DrawerTitle>
+                  </DrawerHeader>
+                  <div className="px-4 pb-4 overflow-auto">
+                    <BrandForm onClose={() => setBrandDrawerOpen(false)} />
+                  </div>
+                </DrawerContent>
+              </Drawer>
+            </div>
+            <BrandsView />
           </div>
         </TabsContent>
       </Tabs>
