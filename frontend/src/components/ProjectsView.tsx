@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
+import { QUERY_KEYS } from '@/lib/constants';
+import useFetchProjects from '@/hooks/useFetchProjects';
 import { Trash2, Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,17 +21,14 @@ export default function ProjectsView() {
   const [editingProject, setEditingProject] = useState<ProjectItem | null>(null);
   const [confirmingProject, setConfirmingProject] = useState<ProjectItem | null>(null);
 
-  const { data: projects = [], isLoading, isError } = useQuery({
-    queryKey: ['projects'],
-    queryFn: api.getProjects,
-  });
+  const { data: projects = [], isLoading, isError } = useFetchProjects();
 
   const deleteMutation = useMutation({
     mutationFn: api.deleteProject,
     onSuccess: () => {
       toast.success('Project removed');
       setConfirmingProject(null);
-      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.PROJECTS });
     },
     onError: () => {
       toast.error('Failed to delete project');
@@ -113,7 +112,7 @@ export default function ProjectsView() {
           <DrawerHeader>
             <DrawerTitle>Edit project</DrawerTitle>
           </DrawerHeader>
-          <div className="px-4 pb-4">
+          <div className="p-4 pb-4">
             {editingProject && (
               <ProjectForm
                 project={editingProject}

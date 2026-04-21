@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { api } from '@/api/api';
 import  DeleteConfirmDrawer  from '@/components/DeleteConfirmDrawer';
+import { QUERY_KEYS } from '@/lib/constants';
 
 export default function BrandsView() {
   const { data: brands, isLoading, isError } = useFetchBrands();
@@ -19,8 +20,8 @@ export default function BrandsView() {
     onSuccess: () => {
       toast.success('Brand removed');
       setConfirmingBrand(null);
-      queryClient.invalidateQueries({ queryKey: ['brands'] });
-      queryClient.invalidateQueries({ queryKey: ['skeins'] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.BRANDS });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.SKEINS });
     },
     onError: () => {
       toast.error('Failed to delete brand');

@@ -35,6 +35,12 @@ export const COLOR_MAP: Record<string, string> = {
   lavender: '#e6e6fa',
 };
 
+export const QUERY_KEYS = {
+  PROJECTS: ['projects'] as const,
+  SKEINS: ['skeins'] as const,
+  BRANDS: ['brands'] as const,
+}
+
 export const API_ENDPOINTS = {
   SKEINS: '/skeins',
   PROJECTS: '/projects',

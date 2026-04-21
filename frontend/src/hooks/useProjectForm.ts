@@ -1,5 +1,7 @@
 import { useMemo, useEffect } from 'react';
+import { QUERY_KEYS } from '@/lib/constants';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import useFetchProjects from '@/hooks/useFetchProjects';
 import { useForm, useFieldArray, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -27,10 +29,7 @@ export default function useProjectForm({ project, onClose }: UseProjectFormProps
     queryFn: api.getCategories,
   });
 
-  const { data: existingProjects = [] } = useQuery({
-    queryKey: ['projects'],
-    queryFn: api.getProjects,
-  });
+  const { data: existingProjects = [] } = useFetchProjects();
 
   const allSkeins = useMemo(
     () =>
@@ -105,7 +104,7 @@ export default function useProjectForm({ project, onClose }: UseProjectFormProps
 
   const onSuccess = (message: string) => {
     toast.success(message);
-    queryClient.invalidateQueries({ queryKey: ['projects'] });
+    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.PROJECTS });
     onClose();
   };
   const onError = (error: Error) => toast.error(error.message);

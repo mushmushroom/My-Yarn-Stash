@@ -1,12 +1,10 @@
 import { useMemo, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { useSkeinsStore } from '@/store/skeins.store';
 import { BACKEND_URL } from '@/lib/constants';
 import { useFiltersStore } from '@/store/filters.store';
 import useRemoveSkein from '@/hooks/useRemoveSkein';
 import SkeinCard from '@/components/SkeinCard';
-import { api } from '@/api/api';
-import type { ProjectItem } from '@/lib/types';
+import useFetchProjects from '@/hooks/useFetchProjects';
 
 export default function StashView() {
   const { grouped, isLoading, isError, fetch } = useSkeinsStore();
@@ -17,10 +15,7 @@ export default function StashView() {
     fetch(filters);
   }, [fetch, filters]);
 
-  const { data: projects = [] } = useQuery<ProjectItem[]>({
-    queryKey: ['projects'],
-    queryFn: api.getProjects,
-  });
+  const { data: projects = [] } = useFetchProjects();
 
   const usedWeightPerSkein = useMemo(() => {
     const map: Record<number, number> = {};
@@ -42,15 +37,17 @@ export default function StashView() {
   }
   return (
     <div className="space-y-8">
-      {entries.map(([brandName, skeins]) => (
-        <div key={brandName}>
+      {entries.map(([brandName, skeins], index) => (
+        <div key={brandName} className={index < entries.length - 1 ? 'pb-8 border-b border-foreground/20' : ''}>
           <div className="flex items-center gap-3 mb-4">
             {Object.values(skeins)[0]?.[0]?.brand?.logo_filename ? (
-              <img
-                src={`${BACKEND_URL}/static/brand-logos/${Object.values(skeins)[0][0].brand!.logo_filename}`}
-                alt={brandName}
-                className="w-24 h-auto max-h-10 object-contain"
-              />
+              <div className="inline-flex items-center px-3 py-1.5 rounded-lg bg-card border border-foreground/8">
+                <img
+                  src={`${BACKEND_URL}/static/brand-logos/${Object.values(skeins)[0][0].brand!.logo_filename}`}
+                  alt={brandName}
+                  className="w-24 h-auto max-h-10 object-contain"
+                />
+              </div>
             ) : (
               <span className="text-base font-semibold text-primary">
                 {brandName || 'No brand'}

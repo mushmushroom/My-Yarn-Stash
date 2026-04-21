@@ -14,7 +14,7 @@ import { useMemo } from 'react';
 import { COLOR_MAP } from '@/lib/constants';
 import useFetchBrands from '@/hooks/useFetchBrands';
 import useFetchFibers from '@/hooks/useFetchFibers';
-import  FiberChips  from '@/components/ui/fiber-chips';
+import FiberChips from '@/components/ui/fiber-chips';
 
 export default function StashFilters() {
   const { filters, setFilters, clearFilters } = useFiltersStore();
@@ -32,13 +32,13 @@ export default function StashFilters() {
   }, [filters]);
 
   return (
-    <Drawer direction="right" >
+    <Drawer direction="right">
       <DrawerTrigger asChild>
-        <Button variant="outline" size="sm">
-          <SlidersHorizontal className="size-4 mr-1" />
-          Filters
+        <Button variant="outline" className="rounded-full border-foreground/12 bg-card hover:bg-white gap-1.5 font-medium text-sm">
+          <SlidersHorizontal className="size-4" />
+          Show filters
           {activeCount > 0 && (
-            <span className="ml-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
+            <span className="flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
               {activeCount}
             </span>
           )}
@@ -50,7 +50,7 @@ export default function StashFilters() {
           <DrawerTitle>Filters</DrawerTitle>
         </DrawerHeader>
 
-        <div className="px-4 space-y-6">
+        <div className="p-4 space-y-6">
           {/* Availability */}
           <div>
             <Button
@@ -65,7 +65,9 @@ export default function StashFilters() {
           {/* Brand */}
           {brands.length > 0 && (
             <div className="space-y-2">
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Brand</p>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                Brand
+              </p>
               <div className="flex flex-wrap gap-2">
                 {brands.map((brand) => (
                   <Button
@@ -83,7 +85,9 @@ export default function StashFilters() {
 
           {/* Fibers */}
           <div className="space-y-2">
-            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Fiber</p>
+            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+              Fiber
+            </p>
             <FiberChips
               fibers={fibers}
               selected={filters.fibers ?? []}
@@ -94,7 +98,9 @@ export default function StashFilters() {
 
           {/* Colors */}
           <div className="space-y-2">
-            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Color</p>
+            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+              Color
+            </p>
             <div className="flex flex-wrap gap-2">
               {Object.entries(COLOR_MAP).map(([name, hex]) => {
                 const active = filters.colors?.includes(name);

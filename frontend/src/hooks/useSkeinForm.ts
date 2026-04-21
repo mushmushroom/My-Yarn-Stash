@@ -1,3 +1,4 @@
+import { QUERY_KEYS } from '@/lib/constants';
 import type { SkeinFormData, SkeinItem } from '@/lib/types';
 import { skeinSchema } from '@/schemas/skein.schema';
 import { useSkeinsStore } from '@/store/skeins.store';
@@ -36,7 +37,7 @@ export default function useSkeinForm({ skein, onClose }: UseSkeinFormProps) {
 
   const onSuccess = (message: string) => {
     toast.success(message);
-    queryClient.invalidateQueries({ queryKey: ['skeins'] });
+    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.SKEINS });
     onClose();
   };
   const onError = (error: Error) => toast.error(error.message);

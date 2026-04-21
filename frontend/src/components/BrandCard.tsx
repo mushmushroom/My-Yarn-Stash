@@ -61,7 +61,7 @@ export default function BrandCard({ brand, removing, onRemove }: BrandCardProps)
           <DrawerHeader>
             <DrawerTitle>Edit brand</DrawerTitle>
           </DrawerHeader>
-          <div className="px-4 pb-4 overflow-auto">
+          <div className="p-4 pb-4 overflow-auto">
             <BrandForm brand={brand} onClose={() => setIsEditing(false)} />
           </div>
         </DrawerContent>

@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 import { api } from '@/api/api';
 import type { Brand, BrandFormData } from '@/lib/types';
 import { brandSchema } from '@/schemas/brand.schema';
+import { QUERY_KEYS } from '@/lib/constants';
 
 interface UseBrandFormProps {
   brand?: Brand;
@@ -41,7 +42,7 @@ export default function useBrandForm({ brand, onClose }: UseBrandFormProps) {
 
   const onSuccess = (message: string) => {
     toast.success(message);
-    queryClient.invalidateQueries({ queryKey: ['brands'] });
+    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.BRANDS });
     onClose();
   };
   const onError = (error: Error) => toast.error(error.message);

@@ -26,7 +26,7 @@ export default function DeleteConfirmDrawer({
         <DrawerHeader>
           <DrawerTitle>{title}</DrawerTitle>
         </DrawerHeader>
-        <div className="px-4 pb-4 space-y-4">
+        <div className="p-4 pb-4 space-y-4">
           <p className="text-sm text-muted-foreground">{description}</p>
           {children}
           <div className="flex gap-2">
