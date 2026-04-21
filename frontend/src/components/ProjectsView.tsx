@@ -48,14 +48,14 @@ export default function ProjectsView() {
     <>
       <div className="space-y-4">
         {projects.map((project) => (
-          <div key={project.id} className="p-4 bg-card rounded-xl border border-border shadow-sm">
+          <div key={project.id} className="p-4 bg-card rounded-xl border border-border border-l-4 border-l-primary shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <div>
-                <h3 className="font-semibold">{project.name}</h3>
-                <p className="text-xs text-muted-foreground">{project.category}</p>
+                <h3 className="font-heading text-lg">{project.name}</h3>
+                <p className="text-xs font-medium text-primary/70">{project.category}</p>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
+                <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">
                   {project.skeins.length} skein{project.skeins.length !== 1 ? 's' : ''}
                 </span>
                 <Button
@@ -83,7 +83,7 @@ export default function ProjectsView() {
                 {project.skeins.map((skein) => (
                   <div
                     key={skein.skein_id}
-                    className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-muted text-sm"
+                    className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-accent/60 text-sm text-accent-foreground"
                   >
                     <span
                       className="size-3 rounded-full border border-border shrink-0 inline-block"

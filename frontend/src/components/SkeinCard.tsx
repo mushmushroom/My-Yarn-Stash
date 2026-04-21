@@ -20,7 +20,7 @@ export default function SkeinCard({ skein, usedWeight, removing, onRemove }: Ske
 
   return (
     <>
-      <div className="flex items-center gap-7 p-2 rounded-lg border border-border bg-card">
+      <div className="flex items-center gap-7 p-2 rounded-lg border border-border bg-card border-l-4 border-l-primary/50">
         <div className="flex items-center gap-2">
           <div
             className="size-6 rounded-full shrink-0 border border-border"

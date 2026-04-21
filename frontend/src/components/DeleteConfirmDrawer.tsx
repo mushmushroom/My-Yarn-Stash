@@ -35,7 +35,7 @@ export default function DeleteConfirmDrawer({
             </Button>
             <Button
               variant="destructive"
-              className="flex-1"
+              className="flex-1 bg-destructive text-white hover:bg-destructive/80"
               disabled={isPending}
               onClick={onConfirm}
             >

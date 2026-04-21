@@ -25,26 +25,26 @@ function App() {
   return (
     <div className="min-h-screen bg-background">
       <Tabs defaultValue="skeins" className="flex flex-col h-screen">
-        <div className="border-b bg-card px-6 shadow-sm">
+        <div className="border-b border-primary/20 bg-primary/8 px-6 shadow-sm">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-6 py-3">
-              <span className="font-semibold text-base tracking-tight">🧶 Yarn Stash</span>
+              <span className="font-heading text-xl tracking-tight text-primary">🧶 Yarn Stash</span>
               <TabsList className="bg-transparent gap-1 p-0">
                 <TabsTrigger
                   value="skeins"
-                  className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-4"
+                  className="font-heading text-base rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-4 data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground"
                 >
                   Skeins
                 </TabsTrigger>
                 <TabsTrigger
                   value="projects"
-                  className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-4"
+                  className="font-heading text-base rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-4 data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground"
                 >
                   Projects
                 </TabsTrigger>
                 <TabsTrigger
                   value="brands"
-                  className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-4"
+                  className="font-heading text-base rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-4 data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground"
                 >
                   Brands
                 </TabsTrigger>
@@ -56,7 +56,7 @@ function App() {
         <TabsContent value="skeins" className="flex-1 overflow-auto py-8">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold">Your stash</h2>
+              <h2 className="font-heading text-2xl text-primary">Your stash</h2>
               <div className="flex items-center gap-2">
                 <StashFilters />
                 <Drawer direction="right" open={skeinDrawerOpen} onOpenChange={setSkeinDrawerOpen}>
@@ -85,7 +85,7 @@ function App() {
         <TabsContent value="projects" className="flex-1 overflow-auto py-8">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold">Projects</h2>
+              <h2 className="font-heading text-2xl text-primary">Projects</h2>
               <Drawer
                 direction="right"
                 open={projectDrawerOpen}
@@ -115,7 +115,7 @@ function App() {
         <TabsContent value="brands" className="flex-1 overflow-auto py-8">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold">Brands</h2>
+              <h2 className="font-heading text-2xl text-primary">Brands</h2>
               <Drawer direction="right" open={brandDrawerOpen} onOpenChange={setBrandDrawerOpen}>
                 <DrawerTrigger asChild>
                   <Button size="sm">

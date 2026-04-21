@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useSkeinsStore } from '@/store/skeins.store';
 import { BACKEND_URL } from '@/lib/constants';
 import { useFiltersStore } from '@/store/filters.store';
-import  useRemoveSkein  from '@/hooks/useRemoveSkein';
-import  SkeinCard  from '@/components/SkeinCard';
+import useRemoveSkein from '@/hooks/useRemoveSkein';
+import SkeinCard from '@/components/SkeinCard';
 import { api } from '@/api/api';
 import type { ProjectItem } from '@/lib/types';
 
@@ -36,7 +36,6 @@ export default function StashView() {
   if (isError) return <p className="text-destructive text-sm">Failed to load stash.</p>;
 
   const entries = Object.entries(grouped);
-  console.log(entries);
 
   if (entries.length === 0) {
     return <p className="text-muted-foreground text-sm">No skeins added yet.</p>;
@@ -53,7 +52,9 @@ export default function StashView() {
                 className="w-24 h-auto max-h-10 object-contain"
               />
             ) : (
-              <span className="text-base font-semibold">{brandName || 'No brand'}</span>
+              <span className="text-base font-semibold text-primary">
+                {brandName || 'No brand'}
+              </span>
             )}
           </div>
 
@@ -65,7 +66,7 @@ export default function StashView() {
                   {(() => {
                     const uniqueFibers = [...new Set(variants.flatMap((s) => s.fibers ?? []))];
                     return uniqueFibers.length > 0 ? (
-                      <p className="text-xs text-muted-foreground">{uniqueFibers.join(' · ')}</p>
+                      <p className="text-xs text-primary/60">{uniqueFibers.join(' · ')}</p>
                     ) : null;
                   })()}
                 </div>

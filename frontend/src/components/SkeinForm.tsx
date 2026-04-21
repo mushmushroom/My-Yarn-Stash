@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Controller } from 'react-hook-form';
 import { ColorPicker } from '@/components/ui/color-picker';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
-import  AutocompleteInput  from '@/components/ui/autocomplete-input';
+import AutocompleteInput from '@/components/ui/autocomplete-input';
 import {
   Select,
   SelectContent,
@@ -15,7 +15,7 @@ import {
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import  FiberChips  from '@/components/ui/fiber-chips';
+import FiberChips from '@/components/ui/fiber-chips';
 import { api } from '@/api/api';
 import useFetchBrands from '@/hooks/useFetchBrands';
 import useFetchFibers from '@/hooks/useFetchFibers';
@@ -33,7 +33,7 @@ export default function SkeinForm({ skein, onClose }: SkeinFormProps) {
       skein,
       onClose,
     });
-    const { data: brands = [], isLoading: isBrandsLoading } = useFetchBrands();
+  const { data: brands = [], isLoading: isBrandsLoading } = useFetchBrands();
   const { data: fibers = [], isLoading: isFibersLoading } = useFetchFibers();
 
   const { data: yardageUnits = [], isLoading: isYardageUnitsLoading } = useQuery({
@@ -47,7 +47,7 @@ export default function SkeinForm({ skein, onClose }: SkeinFormProps) {
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, (errors) => console.log('Validation errors:', errors))}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-6">
         <FieldGroup>
           <Field>
@@ -211,7 +211,9 @@ export default function SkeinForm({ skein, onClose }: SkeinFormProps) {
           {mutation.isPending ? 'Saving...' : skein ? 'Save changes' : 'Save skein'}
         </Button>
 
-        {errors && <p className="text-sm text-destructive text-center">{mutation.error?.message}</p>}
+        {errors && (
+          <p className="text-sm text-destructive text-center">{mutation.error?.message}</p>
+        )}
       </div>
     </form>
   );
